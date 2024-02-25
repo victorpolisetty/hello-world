@@ -19,7 +19,7 @@ of the demo.
 
 You can find the instructions on how to run the Hello World service in the [quick start](https://docs.autonolas.network/open-autonomy/guides/quick_start.md) guide.
 
-If you have [set up the framework](https://docs.autonolas.network/open-autonomy/guides/set_up.md#set-up-the-framework), you can fetch the source code of the Hello World agent:
+If you have [set up the framework](https://docs.autonolas.network/open-autonomy/guides/set_up/#set-up-the-framework), you can fetch the source code of the Hello World agent:
 
 ```bash
 autonomy fetch valory/hello_world:0.1.0:<hash> --alias hello_world_agent
