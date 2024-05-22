@@ -4,21 +4,21 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-open-aea = {version = "==1.51.0", extras = ["all"]}
-open-aea-cli-ipfs = "==1.51.0"
+open-aea = {version = "==1.52.0", extras = ["all"]}
+open-aea-cli-ipfs = "==1.52.0"
 open-aea-cosmpy = "==0.6.7"
-open-aea-ledger-cosmos = "==1.51.0"
-open-aea-ledger-ethereum = "==1.51.0"
-open-aea-ledger-ethereum-hwi = "==1.51.0"
-open-aea-test-autonomy = "==0.14.11.post1"
+open-aea-ledger-cosmos = "==1.52.0"
+open-aea-ledger-ethereum = "==1.52.0"
+open-aea-ledger-ethereum-hwi = "==1.52.0"
+open-aea-test-autonomy = "==0.14.12"
 web3 = "<7,>=6.0.0"
-open-autonomy = {version = "==0.14.11.post1", extras = ["all"]}
+open-autonomy = {version = "==0.14.12", extras = ["all"]}
 
 [dev-packages]
 aiohttp = "<3.8,>=3.7.4"
 asn1crypto = "<1.5.0,>=1.4.0"
 certifi = "*"
-click = "==8.0.2"
+click = ">=8.1.0,<9"
 docker = "==6.1.2"
 ecdsa = ">=0.15"
 eth-abi = "==4.0.0"
@@ -44,7 +44,7 @@ pytz = "==2022.2.1"
 requests = "==2.28.1"
 texttable = "==1.6.7"
 toml = "==0.10.2"
-tomte = {version = "==0.2.15", extras = ["tests", "cli"]}
+tomte = {version = "==0.2.17", extras = ["tests", "cli"]}
 typing_extensions = ">=3.10.0.2"
 valory-docker-compose = "==1.29.3"
 

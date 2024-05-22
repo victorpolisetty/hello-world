@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        os: [ ubuntu-latest, macos-12, windows-latest ]
         python-version: ["3.10.9"]
 
     timeout-minutes: 18
@@ -68,7 +68,7 @@ jobs:
         sudo apt-get update --fix-missing
         sudo apt-get autoremove
         sudo apt-get autoclean
-        pip install tomte[tox,cli]==0.2.13
+        pip install tomte[tox,cli]==0.2.17
         pip install --user --upgrade setuptools
     - name: Check copyright headers
       run: tomte format-copyright --author valory --author fetchai
@@ -106,7 +106,7 @@ jobs:
         sudo apt-get update --fix-missing
         sudo apt-get autoremove
         sudo apt-get autoclean
-        pip install tomte[tox]==0.2.13
+        pip install tomte[tox]==0.2.17
         pip install --user --upgrade setuptools
         # install Protobuf compiler
         wget https://github.com/protocolbuffers/protobuf/releases/download/v3.19.4/protoc-3.19.4-linux-x86_64.zip
@@ -175,7 +175,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        os: [ ubuntu-latest, macos-12, windows-latest ]
         python-version: [ "3.8", "3.9", "3.10.9", "3.11" ]
 
     timeout-minutes: 90
@@ -197,7 +197,7 @@ jobs:
           sudo apt-get update --fix-missing
           sudo apt-get autoremove
           sudo apt-get autoclean
-          pip install tomte[tox]==0.2.13
+          pip install tomte[tox]==0.2.17
           pip install --user --upgrade setuptools
 
           # install Protobuf compiler
@@ -230,10 +230,10 @@ jobs:
         run: |
           tox -e packages-py${{ matrix.python-version }}-linux -- -m 'not e2e'
 
-      - if: matrix.os == 'macos-latest'
-        name: Install dependencies (macos-latest)
+      - if: matrix.os == 'macos-12'
+        name: Install dependencies (macos-12)
         run: |
-          pip install tomte[tox]==0.2.13
+          pip install tomte[tox]==0.2.17
           brew install gcc
           # brew install protobuf
           # brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/72457f0166d5619a83f508f2345b22d0617b5021/Formula/protobuf.rb
@@ -257,8 +257,8 @@ jobs:
           tar -xf tendermint.tar.gz
           sudo mv tendermint /usr/local/bin/tendermint
 
-      - if: matrix.os == 'macos-latest'
-        name: Packages unit tests macos-latest
+      - if: matrix.os == 'macos-12'
+        name: Packages unit tests macos-12
         run: |
           tox -e packages-py${{ matrix.python-version }}-darwin -- -m 'not e2e'
 
@@ -275,7 +275,7 @@ jobs:
           choco install make -y
           # to check make was installed
           make --version
-          pip install tomte[tox]==0.2.13
+          pip install tomte[tox]==0.2.17
           # wget https://github.com/protocolbuffers/protobuf/releases/download/v3.19.4/protoc-3.19.4-win64.zip
           # unzip protoc-3.19.4-win64.zip -d protoc
           # sudo mv protoc/bin/protoc /usr/local/bin/protoc
@@ -340,7 +340,7 @@ jobs:
           sudo apt-get update --fix-missing
           sudo apt-get autoremove
           sudo apt-get autoclean
-          pip install tomte[tox]==0.2.13
+          pip install tomte[tox]==0.2.17
           pip install --user --upgrade setuptools
 
           # install Protobuf compiler
