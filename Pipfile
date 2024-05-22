@@ -18,7 +18,7 @@ open-autonomy = {version = "==0.14.12", extras = ["all"]}
 aiohttp = "<3.8,>=3.7.4"
 asn1crypto = "<1.5.0,>=1.4.0"
 certifi = "*"
-click = "==8.0.2"
+click = ">=8.1.0,<9"
 docker = "==6.1.2"
 ecdsa = ">=0.15"
 eth-abi = "==4.0.0"
