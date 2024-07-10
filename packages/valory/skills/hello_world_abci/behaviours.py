@@ -34,6 +34,7 @@ from packages.valory.skills.hello_world_abci.payloads import (
     RegistrationPayload,
     ResetPayload,
     SelectKeeperPayload,
+    PrintCountPayload
 )
 from packages.valory.skills.hello_world_abci.rounds import (
     CollectRandomnessRound,
@@ -43,6 +44,7 @@ from packages.valory.skills.hello_world_abci.rounds import (
     ResetAndPauseRound,
     SelectKeeperRound,
     SynchronizedData,
+    PrintCountRound
 )
 
 
@@ -193,7 +195,7 @@ class PrintMessageBehaviour(HelloWorldABCIBaseBehaviour, ABC):
         else:
             message = ":|"
 
-        printed_message = f"Agent {self.context.agent_name} (address {self.context.agent_address}) in period {self.synchronized_data.period_count} says: {message}"
+        printed_message = f"Agent {self.context.agent_name} (address {self.context.agent_address}) in period {self.synchronized_data.period_count} says: {message} "
 
         print(printed_message)
         self.context.logger.info(f"printed_message={printed_message}")
@@ -241,6 +243,38 @@ class ResetAndPauseBehaviour(HelloWorldABCIBaseBehaviour):
         self.set_done()
 
 
+class PrintCountBehaviour(HelloWorldABCIBaseBehaviour):
+    """Behaviour to update and print the count of PrintMessageRound executions."""
+
+    matching_round = PrintCountRound
+
+    def async_act(self) -> Generator:
+        """
+        Do the action.
+
+        Steps:
+        - Read the current value of "print_count" from the SynchronizedData.
+        - Increment the print count by 1.
+        - Print to screen "The message has been printed {print_count} times".
+        - Send the transaction with the updated print count and wait for it to be mined.
+        - Wait until ABCI application transitions to the next round.
+        - Go to the next behaviour (set done event).
+        """
+
+        new_count = self.synchronized_data.print_count + 1
+        print(f"The message has been printed {new_count} times")
+        self.context.logger.info(f"printed_count={str(new_count)}")
+
+        payload = PrintCountPayload(
+            self.context.agent_address,
+            new_count,
+        )
+
+        yield from self.send_a2a_transaction(payload)
+        yield from self.wait_until_round_end()
+        self.set_done()
+
+
 class HelloWorldRoundBehaviour(AbstractRoundBehaviour):
     """This behaviour manages the consensus stages for the Hello World abci app."""
 
@@ -251,5 +285,6 @@ class HelloWorldRoundBehaviour(AbstractRoundBehaviour):
         CollectRandomnessBehaviour,  # type: ignore
         SelectKeeperBehaviour,  # type: ignore
         PrintMessageBehaviour,  # type: ignore
+        PrintCountBehaviour,  # type: ignore
         ResetAndPauseBehaviour,  # type: ignore
     }
